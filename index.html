@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>NetTower Pro - نظام إدارة الأبراج</title>
+<link rel="icon" type="image/svg+xml" href="./icons/icon-192.svg">
+<link rel="apple-touch-icon" href="./icons/icon-192.svg">
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#6c5ce7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NetTower Pro">
 <!-- Google Fonts: Tajawal -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
@@ -67,6 +74,59 @@ window.__routerLoaded = false;
 
 <!-- تشغيل التطبيق (يجب أن يكون آخر ملف) -->
 <script src="js/app.js"></script>
+
+<!-- PWA: تسجيل Service Worker -->
+<script src="registerSW.js"></script>
+
+<!-- PWA: زر التثبيت -->
+<style>
+.pwa-install-btn{
+  position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:9000;
+  background:linear-gradient(135deg,#6c5ce7,#5341cd);color:#fff;
+  padding:12px 28px;border-radius:50px;border:none;
+  font-size:14px;font-weight:800;font-family:'Tajawal',sans-serif;
+  cursor:pointer;display:none;align-items:center;gap:8px;
+  box-shadow:0 6px 24px rgba(108,92,231,.45);
+  transition:.3s cubic-bezier(.22,.68,0,1);
+  animation:pwaPulse 2s ease-in-out infinite
+}
+.pwa-install-btn:hover{transform:translateX(-50%) scale(1.05);box-shadow:0 8px 32px rgba(108,92,231,.55)}
+.pwa-install-btn:active{transform:translateX(-50%) scale(.97)}
+.pwa-install-btn i{font-size:18px}
+.pwa-install-btn.show{display:flex}
+@keyframes pwaPulse{0%,100%{box-shadow:0 6px 24px rgba(108,92,231,.45)}50%{box-shadow:0 6px 32px rgba(108,92,231,.65)}}
+@media(max-width:768px){.pwa-install-btn{bottom:calc(var(--nav-h,68px) + 16px)}}
+</style>
+<button class="pwa-install-btn" id="pwaInstallBtn" onclick="window._pwaInstall()">
+  <i class="fas fa-download"></i> تثبيت التطبيق
+</button>
+<script>
+window._deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', function(e) {
+  e.preventDefault();
+  window._deferredPrompt = e;
+  var btn = document.getElementById('pwaInstallBtn');
+  if (btn) btn.classList.add('show');
+});
+window._pwaInstall = function() {
+  if (!window._deferredPrompt) return;
+  window._deferredPrompt.prompt();
+  window._deferredPrompt.userChoice.then(function(r) {
+    if (r.outcome === 'accepted') {
+      var t = document.getElementById('toast');
+      if (t) { t.innerHTML = '✅ تم تثبيت التطبيق'; t.classList.add('show'); setTimeout(function(){ t.classList.remove('show') }, 2800); }
+    }
+    window._deferredPrompt = null;
+    var btn = document.getElementById('pwaInstallBtn');
+    if (btn) btn.classList.remove('show');
+  });
+};
+window.addEventListener('appinstalled', function() {
+  window._deferredPrompt = null;
+  var btn = document.getElementById('pwaInstallBtn');
+  if (btn) btn.classList.remove('show');
+});
+</script>
 
 </body>
 </html>
