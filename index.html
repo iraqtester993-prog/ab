@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>NetTower Pro - نظام إدارة الأبراج</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='32' fill='%236c5ce7'/><circle cx='96' cy='96' r='24' fill='white'/><circle cx='96' cy='96' r='10' fill='%236c5ce7'/></svg>">
+<link rel="apple-touch-icon" href="./icons/icon-192.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -11,9 +13,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="NetTower">
-<link rel="apple-touch-icon" href="./icons/icon-192.svg">
-  <script type="module" crossorigin src="./assets/index-V2EwVGOB.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-Bmnw-2tB.css">
+  <script  src="./assets/index.BwGqtGL4.js"></script>
 <link rel="manifest" href="./manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="./registerSW.js"></script></head>
 <body>
 
@@ -27,6 +27,11 @@
   <div id="modalBody"></div>
 </div>
 
+<div id="vue-error" style="display:none;position:fixed;inset:0;z-index:99999;background:#121217;color:#e17055;font-family:Tajawal,sans-serif;align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:24px;text-align:center;direction:rtl">
+  <div style="font-size:48px">⚠️</div>
+  <h2 style="color:#fcf8ff;font-size:20px">فشل تحميل النظام</h2>
+  <p id="vue-error-msg" style="color:#c8c4d7;max-width:400px;line-height:1.8"></p>
+</div>
 <div id="app"><div style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#121217;color:#c8c4d7;font-family:Tajawal,sans-serif;font-size:16px">جاري تحميل النظام...</div></div>
 
 </body>
